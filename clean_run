@@ -1,0 +1,15 @@
+#!/bin/bash
+
+#clean logs
+rm -rf ./logs/*
+
+#run graph
+main.py
+
+#convert img outputs to gif
+ffmpeg -f image2 -framerate 2 -i logs/generator_%d.jpg logs/out.gif
+rm -f logs/*.jpg
+
+#run tensorboard
+tensorboard --logdir='./logs'
+
